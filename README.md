@@ -50,9 +50,29 @@ and add `CLOUDINARY_FOLDER` variable to .env file with value = folder name in Cl
 
 ### Setup Neon.tech postgres database
 
+**Warning:** Switching to a postgres database will avoid using any data you may have entered into sqlite db. Will also override connection to assets in Cloudinary. Best to connect to neon db before adding any content at all.
+
 1. Create account at [Neon](neon.tech)
-2. Install [Strapi neon tech db plugin](https://market.strapi.io/plugins/strapi-neon-tech-db-branches)
+2. Install postgres `npm i pg`
+3. Install [Strapi neon tech db plugin](https://market.strapi.io/plugins/strapi-neon-tech-db-branches)
 
 `npm i strapi-neon-tech-db-branches`
+
+3. backend/config/plugins.js add:
+
+```js
+"strapi-neon-tech-db-branches": {
+    enabled: true,
+    config: {
+      neonApiKey: env("NEON_API_KEY"), // get it from here: https://console.neon.tech/app/settings/api-keys
+      neonProjectName: env("NEON_PROJECT_NAME"), // the neon project under wich your DB runs
+      neonRole: env("NEON_ROLE"), // create it manually under roles for your project first
+      gitBranch: env("GIT_BRANCH"), // branch can be pinned via this config option. Will not use branch from git then. Usefull for preview/production deployment
+    },
+  },
+```
+
+4. Generate Neon api key from above link and add variables to .env file: `NEON_API_KEY, NEON_PROJECT_NAME, NEON_ROLE, GIT_BRANCH`
+5. Remember in development to change value of GIT_BRANCH to dev branch to avoid committing data to production branch db.
 
 ### Transfer local dev data to remote production
