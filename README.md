@@ -1,4 +1,4 @@
-# strapi-gatsby-blog-tutorial
+# strapi-gatsby-tutorial-blog
 
 Building a static blog in strapi and gatsby
 
