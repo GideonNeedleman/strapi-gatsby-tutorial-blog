@@ -48,6 +48,13 @@ and add `CLOUDINARY_FOLDER` variable to .env file with value = folder name in Cl
 
 ### Deploy to Render.com
 
+1. Create account at Render
+2. New web service from Git repo
+3. Root directory: backend
+4. Build command: `npm install && npm run build`
+5. Start command: `npm run start`
+6. Add .env file under advanced
+
 ### Setup Neon.tech postgres database
 
 **Warning:** Switching to a postgres database will avoid using any data you may have entered into sqlite db. Will also override connection to assets in Cloudinary. Best to connect to neon db before adding any content at all.
@@ -57,6 +64,8 @@ and add `CLOUDINARY_FOLDER` variable to .env file with value = folder name in Cl
 3. Install [Strapi neon tech db plugin](https://market.strapi.io/plugins/strapi-neon-tech-db-branches)
 
 `npm i strapi-neon-tech-db-branches`
+
+<!-- Nevermind, don't need to do this if you add env vars
 
 3. backend/config/plugins.js add:
 
@@ -70,9 +79,11 @@ and add `CLOUDINARY_FOLDER` variable to .env file with value = folder name in Cl
       gitBranch: env("GIT_BRANCH"), // branch can be pinned via this config option. Will not use branch from git then. Usefull for preview/production deployment
     },
   },
-```
+``` -->
 
 4. Generate Neon api key from above link and add variables to .env file: `NEON_API_KEY, NEON_PROJECT_NAME, NEON_ROLE, GIT_BRANCH`
 5. Remember in development to change value of GIT_BRANCH to dev branch to avoid committing data to production branch db.
 
 ### Transfer local dev data to remote production
+
+You can do this if you don't switch to postgres in local dev environment. Then you data will be intact and you can push data to remote production that is running postgres.
