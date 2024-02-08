@@ -123,4 +123,4 @@ Webhook triggers netlify to rebuild gatsby frontend when Strapi content changed.
 1. In Netlify Site Configuration > Build & Deploy > Build Hooks
    - Create new build hook, give it a name like 'Strapi Update' and set main/master branch.
 2. In **deployed** Strapi admin site > Settings > Webhooks
-   1. Add name like 'Update Netlify', add webhook URL and add desired events (maybe all). Don't worry about header.
+   - Add name like 'Update Netlify', add webhook URL and add desired events (maybe all). Don't worry about header.
