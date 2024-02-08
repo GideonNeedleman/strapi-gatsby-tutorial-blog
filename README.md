@@ -96,3 +96,13 @@ You can do this if you don't switch to postgres in local dev environment. Then y
 Follow [Youtube tutorial here](https://youtu.be/RlAv2RNbQjE). And [blog post here.](https://docs.strapi.io/dev-docs/data-management/transfer)
 
 Will need to create 'push' api token in strapi
+
+## Gatsby deploy
+
+Consider editing gatsby-config.js to only accept `.env` file:
+
+```js
+require("dotenv").config({
+  path: `.env`,
+});
+```
