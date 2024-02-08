@@ -57,7 +57,12 @@ and add `CLOUDINARY_FOLDER` variable to .env file with value = folder name in Cl
 
 ### Setup Neon.tech postgres database
 
-**Warning:** Switching to a postgres database will avoid using any data you may have entered into sqlite db. Will also override connection to assets in Cloudinary. Best to connect to neon db before adding any content at all.
+**Warning:** Switching to a postgres database will avoid using any data you may have entered into sqlite db. Will also override connection to assets in Cloudinary.
+
+Options:
+
+- Connect to neon db before adding any content at all. That way no migration is needed and all content is stored in neon db from the start.
+- Make a sqlite branch of Strapi project to maintain local sqlite db of content. On main branch install db, so deployed strapi rebuilds with postgres db. Then migrate data from local sqlite branch to deployed main branch as described in [next section](#transfer).
 
 1. Create account at [Neon](neon.tech)
 2. Install postgres `npm i pg`
@@ -81,9 +86,13 @@ and add `CLOUDINARY_FOLDER` variable to .env file with value = folder name in Cl
   },
 ``` -->
 
-4. Generate Neon api key from above link and add variables to .env file: `NEON_API_KEY, NEON_PROJECT_NAME, NEON_ROLE, GIT_BRANCH`
+4. Generate Neon api key from above link and add variables to .env file: `NEON_API_KEY, NEON_PROJECT_NAME, NEON_ROLE, GIT_BRANCH` - only add env vars to production deployment to prevent losing local dev content data.
 5. Remember in development to change value of GIT_BRANCH to dev branch to avoid committing data to production branch db.
 
-### Transfer local dev data to remote production
+### <span id="transfer"/> Transfer local dev data to remote production
 
-You can do this if you don't switch to postgres in local dev environment. Then you data will be intact and you can push data to remote production that is running postgres.
+You can do this if you don't switch to postgres in local dev environment. Then your data will be intact and you can push data to remote production that is running postgres. The way to do this is to create a branch that maintains sqlite database.
+
+Follow [Youtube tutorial here](https://youtu.be/RlAv2RNbQjE). And [blog post here.](https://docs.strapi.io/dev-docs/data-management/transfer)
+
+Will need to create 'push' api token in strapi
