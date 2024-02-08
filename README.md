@@ -106,3 +106,21 @@ require("dotenv").config({
   path: `.env`,
 });
 ```
+
+### Deploy to Netlify
+
+## Initial Deploy
+
+1. Create netlify account
+2. Add github repo
+3. Add env variable `STRAPI_API_URL` with value of deployed Strapi URL. (do not add /api at end)
+4. Build
+
+## Strapi webhook
+
+Webhook triggers netlify to rebuild gatsby frontend when Strapi content changed.
+
+1. In Netlify Site Configuration > Build & Deploy > Build Hooks
+   - Create new build hook, give it a name like 'Strapi Update' and set main/master branch.
+2. In **deployed** Strapi admin site > Settings > Webhooks
+   1. Add name like 'Update Netlify', add webhook URL and add desired events (maybe all). Don't worry about header.
